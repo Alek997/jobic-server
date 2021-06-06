@@ -16,7 +16,7 @@ export const verifyToken = (token) =>
     })
   })
 
-export const signup = async (req, res) => {
+export const register = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({ message: 'need email and password' })
   }
@@ -30,7 +30,7 @@ export const signup = async (req, res) => {
   }
 }
 
-export const signin = async (req, res) => {
+export const login = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({ message: 'need email and password' })
   }
