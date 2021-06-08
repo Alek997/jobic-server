@@ -1,7 +1,7 @@
 import { User } from './user.model'
 
 export const me = (req, res) => {
-  res.status(200).json({ data: req.user })
+  res.status(200).json({ ...req.user })
 }
 
 export const updateMe = async (req, res) => {
@@ -12,7 +12,7 @@ export const updateMe = async (req, res) => {
       .lean()
       .exec()
 
-    res.status(200).json({ data: user })
+    res.status(200).json({ user })
   } catch (e) {
     console.error(e)
     res.status(400).end()

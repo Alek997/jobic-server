@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const adSchema = new mongoose.Schema(
+const jobSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -33,4 +33,4 @@ const adSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-export const Item = mongoose.model('ad', adSchema)
+export const Job = mongoose.model('job', jobSchema)

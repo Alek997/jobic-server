@@ -1,4 +1,4 @@
 import { crudControllers } from '../../utils/crud'
-import { Ad } from './jobApp.model'
+import { JobApp } from './jobApp.model'
 
-export default crudControllers(Ad)
+export default crudControllers(JobApp)

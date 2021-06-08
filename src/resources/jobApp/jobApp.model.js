@@ -20,11 +20,11 @@ const jobAppSchema = new mongoose.Schema(
     },
     ad: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'ad',
+      ref: 'job',
       required: true,
     },
   },
   { timestamps: true }
 )
 
-export const Item = mongoose.model('jobApp', jobAppSchema)
+export const JobApp = mongoose.model('jobApp', jobAppSchema)

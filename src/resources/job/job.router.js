@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import controllers from './ad.controllers'
+import controllers from './job.controllers'
 
 const router = Router()
 
 // /api/item
-router.route('/').get(controllers.getOne).post(controllers.createOne)
+router.route('/').get(controllers.getMany).post(controllers.createOne)
 
 // /api/item/:id
 router
