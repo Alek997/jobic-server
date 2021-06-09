@@ -22,10 +22,12 @@ export const register = async (req, res) => {
   }
 
   try {
+    console.log('req', req.body)
     const user = await User.create(req.body)
     const token = newToken(user)
     return res.status(201).send({ token })
   } catch (e) {
+    console.log('error', e)
     return res.status(500).end()
   }
 }

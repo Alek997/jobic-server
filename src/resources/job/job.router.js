@@ -6,6 +6,9 @@ const router = Router()
 // /api/item
 router.route('/').get(controllers.getMany).post(controllers.createOne)
 
+// /api/item/all
+router.route('/all').get(controllers.getAll)
+
 // /api/item/:id
 router
   .route('/:id')
