@@ -13,12 +13,12 @@ const jobAppSchema = new mongoose.Schema(
       enum: ['employed', 'pending', 'not_employed'],
       default: 'pending',
     },
-    appliedBy: {
+    createdBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'user',
       required: true,
     },
-    ad: {
+    jobId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'job',
       required: true,
