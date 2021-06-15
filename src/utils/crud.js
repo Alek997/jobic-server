@@ -55,7 +55,7 @@ export const updateOne = (model) => async (req, res) => {
     const updatedDoc = await model
       .findOneAndUpdate(
         {
-          createdBy: req.user._id,
+          // createdBy: req.user._id,
           _id: req.params.id,
         },
         req.body,

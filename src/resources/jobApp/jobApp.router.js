@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { Job } from '../job/job.model'
 import controllers from './jobApp.controllers'
 import { JobApp } from './jobApp.model'
 
@@ -8,7 +9,22 @@ router.route('/').get(controllers.getMany).post(controllers.createOne)
 
 router.route('/app/:id').get(async (req, res) => {
   try {
-    const docs = await JobApp.find({ jobId: req.params.id }).lean().exec()
+    const job = await Job.findOne({
+      _id: req.params.id,
+      createdBy: req.user._id,
+    })
+      .lean()
+      .exec()
+
+    if (!job) {
+      res.status(403).end()
+    }
+
+    const docs = await JobApp.find({
+      jobId: req.params.id,
+    })
+      .lean()
+      .exec()
 
     res.status(200).json({ data: docs })
   } catch (e) {
