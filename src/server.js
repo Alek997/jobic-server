@@ -8,6 +8,7 @@ import { connect } from './utils/db'
 import userRouter from './resources/user/user.router'
 import jobRouter from './resources/job/job.router'
 import jobAppRouter from './resources/jobApp/jobApp.router'
+import categoryRouter from './resources/category/category.router'
 
 export const app = express()
 
@@ -25,6 +26,7 @@ app.use('/api', protect)
 app.use('/api/user', userRouter)
 app.use('/api/job', jobRouter)
 app.use('/api/jobApp', jobAppRouter)
+app.use('/api/category', categoryRouter)
 
 export const start = async () => {
   try {

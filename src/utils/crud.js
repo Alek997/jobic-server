@@ -30,6 +30,7 @@ export const getMany = (model) => async (req, res) => {
 
 export const getAll = (model) => async (req, res) => {
   try {
+    console.log('sve', req.query)
     const docs = await model.find({}).lean().exec()
 
     res.status(200).json({ data: docs })
