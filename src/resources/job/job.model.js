@@ -23,16 +23,16 @@ const jobSchema = new mongoose.Schema(
       ref: 'user',
       required: true,
     },
-    createdBy: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'category',
-      required: true,
-    },
     status: {
       type: String,
       required: true,
       enum: ['active', 'inactive'],
       default: 'active',
+    },
+    category: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'category',
+      required: true,
     },
   },
   { timestamps: true }
