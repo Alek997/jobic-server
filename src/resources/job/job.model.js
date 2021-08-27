@@ -29,7 +29,7 @@ const jobSchema = new mongoose.Schema(
       enum: ['active', 'inactive'],
       default: 'active',
     },
-    category: {
+    categoryId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'category',
       required: true,
