@@ -8,10 +8,33 @@ const jobSchema = new mongoose.Schema(
       trim: true,
       maxlength: 50,
     },
+    city: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 50,
+    },
+    address: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 50,
+    },
+    imageUrl: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 500,
+    },
     description: {
       type: String,
       required: true,
-      maxlength: 250,
+      maxlength: 1500,
+    },
+    categoryId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'category',
+      required: true,
     },
     budget: {
       type: String,
@@ -28,11 +51,6 @@ const jobSchema = new mongoose.Schema(
       required: true,
       enum: ['active', 'inactive'],
       default: 'active',
-    },
-    categoryId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'category',
-      required: true,
     },
   },
   { timestamps: true }
