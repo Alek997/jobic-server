@@ -30,9 +30,13 @@ export const getMany = (model) => async (req, res) => {
 
 export const getAll = (model) => async (req, res) => {
   const { page = 1, limit = 10 } = req.query
+
   try {
     const docs = await model
-      .find({})
+      .find({
+        ...req.query,
+        name: { $regex: req.query.name || '', $options: 'i' },
+      })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .lean()
