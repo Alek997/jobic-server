@@ -29,11 +29,22 @@ export const getMany = (model) => async (req, res) => {
 }
 
 export const getAll = (model) => async (req, res) => {
+  const { page = 1, limit = 10 } = req.query
   try {
-    console.log('sve', req.query)
-    const docs = await model.find({}).lean().exec()
+    const docs = await model
+      .find({})
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .lean()
+      .exec()
 
-    res.status(200).json({ data: docs })
+    const count = await model.countDocuments()
+
+    res.status(200).json({
+      data: docs,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+    })
   } catch (e) {
     console.error(e)
     res.status(400).end()
