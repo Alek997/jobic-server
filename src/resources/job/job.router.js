@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import controllers from './job.controllers'
+import controllers, { filterJobs } from './job.controllers'
 
 const router = Router()
 
@@ -7,7 +7,7 @@ const router = Router()
 router.route('/').get(controllers.getMany).post(controllers.createOne)
 
 // /api/item/all
-router.route('/all').get(controllers.getAll)
+router.route('/all').get(filterJobs)
 
 // /api/item/:id
 router
