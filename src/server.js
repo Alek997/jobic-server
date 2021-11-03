@@ -8,9 +8,22 @@ import { connect } from './utils/db'
 import userRouter from './resources/user/user.router'
 import jobRouter from './resources/job/job.router'
 import jobAppRouter from './resources/jobApp/jobApp.router'
-import imageRouter from './resources/image/image.router'
-
 import categoryRouter from './resources/category/category.router'
+import path from 'path'
+import fs from 'fs'
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public')
+  },
+  filename: (req, file, cb) => {
+    console.log('file', file)
+    cb(null, 'image-' + Date.now() + '.png')
+  },
+})
+
+const upload = multer({ storage: storage }).single('image')
 
 export const app = express()
 
@@ -23,15 +36,23 @@ app.use(morgan('dev'))
 
 app.post('/register', register)
 app.post('/login', login)
-
-app.use('/image', imageRouter) // TODO protects this!!!
+app.use(express.static('public'))
 
 app.use('/api', protect)
 app.use('/api/user', userRouter)
 app.use('/api/job', jobRouter)
 app.use('/api/jobApp', jobAppRouter)
 app.use('/api/category', categoryRouter)
-// app.use('')
+
+app.post('/api/upload', (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      res.sendStatus(500)
+    }
+
+    res.send(`http://localhost:${config.port}/${req.file?.filename}`)
+  })
+})
 
 export const start = async () => {
   try {
