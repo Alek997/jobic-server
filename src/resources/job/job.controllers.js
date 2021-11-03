@@ -4,8 +4,6 @@ import { Job } from './job.model'
 export const filterJobs = async (req, res) => {
   const { page = 1, limit = 10, budgetFrom, budgetTo } = req.query
 
-  console.log('req', req.query)
-
   const query = {
     name: { $regex: req.query.name || '', $options: 'i' },
     city: { $regex: req.query.city || '', $options: 'i' },
