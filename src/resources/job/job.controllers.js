@@ -1,6 +1,16 @@
 import { crudControllers } from '../../utils/crud'
 import { Job } from './job.model'
 
+export const findByUser = async (req, res) => {
+  try {
+    const docs = await Job.find({ createdBy: req.params.userId }).lean().exec()
+    res.status(200).json({ data: docs })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
 export const filterJobs = async (req, res) => {
   const { page = 1, limit = 10, budgetFrom, budgetTo } = req.query
 
