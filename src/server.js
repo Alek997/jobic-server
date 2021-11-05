@@ -9,8 +9,8 @@ import userRouter from './resources/user/user.router'
 import jobRouter from './resources/job/job.router'
 import jobAppRouter from './resources/jobApp/jobApp.router'
 import categoryRouter from './resources/category/category.router'
-import path from 'path'
-import fs from 'fs'
+import reviewRouter from './resources/review/review.router'
+
 const multer = require('multer')
 
 const storage = multer.diskStorage({
@@ -43,6 +43,7 @@ app.use('/api/user', userRouter)
 app.use('/api/job', jobRouter)
 app.use('/api/jobApp', jobAppRouter)
 app.use('/api/category', categoryRouter)
+app.use('/api/review', reviewRouter)
 
 app.post('/api/upload', (req, res) => {
   upload(req, res, (err) => {
