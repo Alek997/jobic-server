@@ -4,7 +4,11 @@ import controllers, { findByUser } from './review.controllers'
 const router = Router()
 
 // /api/item
-router.route('/').get(controllers.getMany).post(controllers.createOne)
+router
+  .route('/')
+  .get(controllers.getMany)
+  .post(controllers.createOne)
+  .put(controllers.updateOne)
 
 router.route('/findByUser/:userId').get(findByUser)
 
