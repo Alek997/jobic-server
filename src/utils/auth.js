@@ -26,7 +26,6 @@ export const register = async (req, res) => {
     const token = newToken(user)
     return res.status(201).send({ token })
   } catch (e) {
-    console.log('error', e)
     return res.status(500).end()
   }
 }

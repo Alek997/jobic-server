@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema(
       trim: true,
       maxlength: 500,
     },
+    avgRating: {
+      type: Number,
+      required: false,
+    },
   },
   { timestamps: true }
 )

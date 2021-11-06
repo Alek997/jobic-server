@@ -1,14 +1,14 @@
 import { Router } from 'express'
-import controllers, { findByUser } from './review.controllers'
+import controllers, {
+  createReview,
+  findByUser,
+  updateReview,
+} from './review.controllers'
 
 const router = Router()
 
 // /api/item
-router
-  .route('/')
-  .get(controllers.getMany)
-  .post(controllers.createOne)
-  .put(controllers.updateOne)
+router.route('/').post(createReview).put(updateReview)
 
 router.route('/findByUser/:userId').get(findByUser)
 
