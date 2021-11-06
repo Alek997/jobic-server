@@ -23,6 +23,7 @@ router.route('/app/:id').get(async (req, res) => {
     const docs = await JobApp.find({
       jobId: req.params.id,
     })
+      .populate('createdBy')
       .lean()
       .exec()
 

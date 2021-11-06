@@ -35,6 +35,7 @@ app.use(morgan('dev'))
 
 app.post('/register', register)
 app.post('/login', login)
+
 app.use(express.static('public'))
 
 app.use('/api', protect)
