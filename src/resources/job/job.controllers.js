@@ -12,7 +12,9 @@ export const findByUser = async (req, res) => {
 }
 
 export const filterJobs = async (req, res) => {
-  const { page = 1, limit = 10, budgetFrom, budgetTo } = req.query
+  const { budgetFrom, budgetTo } = req.query
+  const pageParam = parseInt(req.query.pageParam)
+  const size = parseInt(req.query.size)
 
   const query = {
     name: { $regex: req.query.name || '', $options: 'i' },
@@ -28,17 +30,21 @@ export const filterJobs = async (req, res) => {
 
   try {
     const docs = await Job.find(query)
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
+      .limit(size * 1)
+      .skip((pageParam - 1) * size)
       .lean()
       .exec()
 
     const count = await Job.countDocuments()
+    const totalPages = Math.ceil(count / size)
 
     res.status(200).json({
-      data: docs,
-      totalPages: Math.ceil(count / limit),
-      currentPage: page,
+      content: docs,
+      totalElements: count,
+      totalPages: totalPages,
+      last: pageParam === totalPages,
+      currentPage: pageParam,
+      size: size,
     })
   } catch (e) {
     console.error(e)
