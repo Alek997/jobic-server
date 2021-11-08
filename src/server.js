@@ -56,7 +56,7 @@ app.post('/api/upload', (req, res) => {
       res.sendStatus(500)
     }
 
-    res.send(`http://localhost:3001/${req.file?.filename}`)
+    res.send(`https://localhost:3001/${req.file?.filename}`)
   })
 })
 
