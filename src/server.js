@@ -11,6 +11,11 @@ import jobAppRouter from './resources/jobApp/jobApp.router'
 import categoryRouter from './resources/category/category.router'
 import reviewRouter from './resources/review/review.router'
 
+const fs = require('fs')
+const key = fs.readFileSync('./key.pem')
+const cert = fs.readFileSync('./cert.pem')
+const https = require('https')
+
 const multer = require('multer')
 
 const storage = multer.diskStorage({
@@ -51,15 +56,23 @@ app.post('/api/upload', (req, res) => {
       res.sendStatus(500)
     }
 
-    res.send(`http://localhost:${config.port}/${req.file?.filename}`)
+    res.send(`http://localhost:3001/${req.file?.filename}`)
   })
 })
 
 export const start = async () => {
   try {
     await connect()
-    app.listen(config.port, () => {
-      console.log(`REST API on http://localhost:${config.port}`)
+    const server = https.createServer({ key: key, cert: cert }, app)
+
+    // app.listen(config.port, () => {
+    //   console.log(`REST API on http://localhost:${config.port}`)
+    // })
+    app.get('/', (req, res) => {
+      res.send('this is an secure server')
+    })
+    server.listen(3001, () => {
+      console.log('listening on 3001')
     })
   } catch (e) {
     console.error(e)
