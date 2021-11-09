@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { Job } from '../job/job.model'
-import controllers from './jobApp.controllers'
+import controllers, { updateJobApp } from './jobApp.controllers'
 import { JobApp } from './jobApp.model'
 
 const router = Router()
@@ -37,7 +37,7 @@ router.route('/app/:id').get(async (req, res) => {
 router
   .route('/:id')
   .get(controllers.getOne)
-  .put(controllers.updateOne)
+  .put(updateJobApp)
   .delete(controllers.removeOne)
 
 export default router

@@ -10,6 +10,7 @@ import jobRouter from './resources/job/job.router'
 import jobAppRouter from './resources/jobApp/jobApp.router'
 import categoryRouter from './resources/category/category.router'
 import reviewRouter from './resources/review/review.router'
+import notificationRouter from './resources/notification/notification.router'
 
 const fs = require('fs')
 const key = fs.readFileSync('./key.pem')
@@ -49,6 +50,7 @@ app.use('/api/job', jobRouter)
 app.use('/api/jobApp', jobAppRouter)
 app.use('/api/category', categoryRouter)
 app.use('/api/review', reviewRouter)
+app.use('/api/notification', notificationRouter)
 
 app.post('/api/upload', (req, res) => {
   upload(req, res, (err) => {
