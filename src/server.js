@@ -67,9 +67,6 @@ export const start = async () => {
     await connect()
     const server = https.createServer({ key: key, cert: cert }, app)
 
-    // app.listen(config.port, () => {
-    //   console.log(`REST API on http://localhost:${config.port}`)
-    // })
     app.get('/', (req, res) => {
       res.send('this is an secure server')
     })
