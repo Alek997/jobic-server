@@ -35,6 +35,11 @@ const userSchema = new mongoose.Schema(
       trim: true,
       maxlength: 500,
     },
+    summary: {
+      type: String,
+      required: false,
+      maxlength: 1500,
+    },
     avgRating: {
       type: Number,
       required: false,

@@ -1,4 +1,5 @@
 import { crudControllers } from '../../utils/crud'
+import { Job } from '../job/job.model'
 import { notifyUser } from '../notification/notification.controllers'
 import { JobApp } from './jobApp.model'
 
@@ -6,6 +7,13 @@ export const updateJobApp = async (req, res) => {
   try {
     const status = req.body.status
     if (status === 'employed') {
+      if (req.body.only) {
+        await Job.findOneAndUpdate(
+          { _id: req.body.jobId },
+          { status: 'inactive' }
+        )
+      }
+
       notifyUser(
         {
           title: 'Employed',
@@ -16,6 +24,7 @@ export const updateJobApp = async (req, res) => {
       )
     }
     if (status === 'not_employed') {
+      await Job.findOneAndUpdate({ _id: req.body.jobId }, { status: 'active' })
       notifyUser(
         {
           title: 'not_employed',
