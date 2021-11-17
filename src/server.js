@@ -11,10 +11,6 @@ import jobAppRouter from './resources/jobApp/jobApp.router'
 import categoryRouter from './resources/category/category.router'
 import reviewRouter from './resources/review/review.router'
 import notificationRouter from './resources/notification/notification.router'
-import { generateJob, generateJobApp, generateReview } from './utils/generator'
-import { Job } from './resources/job/job.model'
-import { JobApp } from './resources/jobApp/jobApp.model'
-import { Review } from './resources/review/review.model'
 
 const fs = require('fs')
 const key = fs.readFileSync('./key.pem')
