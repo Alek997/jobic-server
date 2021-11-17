@@ -58,20 +58,25 @@ app.post('/api/upload', (req, res) => {
       res.sendStatus(500)
     }
 
-    res.send(`https://localhost:3001/${req.file?.filename}`)
+    res.send(`https://localhost:4000/${req.file?.filename}`)
   })
 })
 
 export const start = async () => {
   try {
     await connect()
+
+    // const randomJob = await generateJob()
+    // const randomJobApp = await generateJobApp()
+    // const randomReview = await generateReview()
+
     const server = https.createServer({ key: key, cert: cert }, app)
 
     app.get('/', (req, res) => {
       res.send('this is an secure server')
     })
-    server.listen(3001, () => {
-      console.log('listening on 3001')
+    server.listen(config.port, () => {
+      console.log('listening on 4000')
     })
   } catch (e) {
     console.error(e)
