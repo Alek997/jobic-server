@@ -17,7 +17,7 @@ export const updateJobApp = async (req, res) => {
       notifyUser(
         {
           title: 'Employed',
-          description: `Svaka cast bravo ti ga bravo`,
+          description: `Congratulations for landing a great job!`,
           reference: req.body.jobId,
         },
         req.body.createdBy._id
@@ -28,7 +28,7 @@ export const updateJobApp = async (req, res) => {
       notifyUser(
         {
           title: 'not_employed',
-          description: `Ne svaka cast, ne bravo ti ga bravo`,
+          description: `More luck next time!`,
           reference: req.body.jobId,
         },
         req.body.createdBy._id
