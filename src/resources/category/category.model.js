@@ -1,4 +1,3 @@
-import { trimEnd } from 'lodash'
 import mongoose from 'mongoose'
 
 const categorySchema = new mongoose.Schema({
@@ -8,6 +7,12 @@ const categorySchema = new mongoose.Schema({
     trim: true,
     unique: true,
     maxlength: 50,
+  },
+  defaultImageUrl: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 500,
   },
 })
 

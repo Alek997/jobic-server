@@ -1,10 +1,14 @@
 import { Router } from 'express'
-import controllers, { filterJobs, findByUser } from './job.controllers'
+import controllers, {
+  createJob,
+  filterJobs,
+  findByUser,
+} from './job.controllers'
 
 const router = Router()
 
 // /api/item
-router.route('/').get(controllers.getMany).post(controllers.createOne)
+router.route('/').get(controllers.getMany).post(createJob)
 
 // /api/item/all
 router.route('/all').get(filterJobs)

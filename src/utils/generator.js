@@ -11,22 +11,19 @@ export const generateJob = async () => {
   const categories = await Category.find({}).lean().exec()
   const users = await User.find({}).lean().exec()
 
-  const categoryId =
-    categories[Math.floor(Math.random() * categories.length)]._id
-  const userId = users[Math.floor(Math.random() * users.length)]._id
+  const category = categories[Math.floor(Math.random() * categories.length)]
+  const user = users[Math.floor(Math.random() * users.length)]._id
 
   const randomJob = {
     name: capitalize(faker.lorem.words(random(1, 3))),
     city: faker.address.city(),
     address: faker.address.streetAddress(),
-    imageUrl: faker.image.imageUrl(400, 300, 'people', true, true),
+    imageUrl: category.defaultImageUrl,
     description: capitalize(faker.lorem.words(random(50, 150))),
     budget: Math.round(faker.datatype.number(random(3000, 9000)) / 50) * 50,
-    categoryId: new mongoose.mongo.ObjectId(categoryId),
-    createdBy: new mongoose.mongo.ObjectId(userId),
+    categoryId: new mongoose.mongo.ObjectId(category._id),
+    createdBy: new mongoose.mongo.ObjectId(user._id),
   }
-
-  Job.create(randomJob)
 
   return randomJob
 }
@@ -49,8 +46,6 @@ export const generateJobApp = async () => {
     createdBy: new mongoose.mongo.ObjectId(userId),
   }
 
-  JobApp.create(randomJobApp)
-
   return randomJobApp
 }
 
@@ -69,8 +64,6 @@ export const generateReview = async () => {
     createdBy: new mongoose.mongo.ObjectId(userId),
     ratedUser: new mongoose.mongo.ObjectId(ratedUserId),
   }
-
-  Review.create(randomReview)
 
   return randomReview
 }

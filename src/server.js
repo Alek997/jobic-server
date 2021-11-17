@@ -11,6 +11,10 @@ import jobAppRouter from './resources/jobApp/jobApp.router'
 import categoryRouter from './resources/category/category.router'
 import reviewRouter from './resources/review/review.router'
 import notificationRouter from './resources/notification/notification.router'
+import { generateJob, generateJobApp, generateReview } from './utils/generator'
+import { Job } from './resources/job/job.model'
+import { JobApp } from './resources/jobApp/jobApp.model'
+import { Review } from './resources/review/review.model'
 
 const fs = require('fs')
 const key = fs.readFileSync('./key.pem')
@@ -65,10 +69,11 @@ app.post('/api/upload', (req, res) => {
 export const start = async () => {
   try {
     await connect()
-
-    // const randomJob = await generateJob()
-    // const randomJobApp = await generateJobApp()
-    // const randomReview = await generateReview()
+    // for (let step = 0; step < 30; step++) {
+    // Job.create(await generateJob())
+    // JobApp.create(await generateJobApp())
+    // Review.create(await generateReview())
+    // }
 
     const server = https.createServer({ key: key, cert: cert }, app)
 

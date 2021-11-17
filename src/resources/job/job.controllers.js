@@ -1,4 +1,5 @@
 import { crudControllers } from '../../utils/crud'
+import { Category } from '../category/category.model'
 import { Job } from './job.model'
 
 export const findByUser = async (req, res) => {
@@ -46,6 +47,30 @@ export const filterJobs = async (req, res) => {
       currentPage: pageParam,
       size: size,
     })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
+export const getCategoryImage = async (categoryId) => {
+  const category = await Category.findById(categoryId).lean().exec()
+
+  return category.defaultImageUrl
+}
+
+export const createJob = async (req, res) => {
+  const createdBy = req.user._id
+
+  try {
+    const doc = await Job.create({
+      ...req.body,
+      createdBy,
+      imageUrl: req.body?.imageUrl
+        ? req.body.imageUrl
+        : await getCategoryImage(req.body.categoryId),
+    })
+    res.status(201).json({ data: doc })
   } catch (e) {
     console.error(e)
     res.status(400).end()
