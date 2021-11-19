@@ -11,6 +11,7 @@ import jobAppRouter from './resources/jobApp/jobApp.router'
 import categoryRouter from './resources/category/category.router'
 import reviewRouter from './resources/review/review.router'
 import notificationRouter from './resources/notification/notification.router'
+import { generateCategories, generateRandomData } from './utils/generator'
 
 const fs = require('fs')
 const key = fs.readFileSync('./key.pem')
@@ -65,11 +66,10 @@ app.post('/api/upload', (req, res) => {
 export const start = async () => {
   try {
     await connect()
-    // for (let step = 0; step < 30; step++) {
-    // Job.create(await generateJob())
-    // JobApp.create(await generateJobApp())
-    // Review.create(await generateReview())
-    // }
+
+    // generating data if db is empty
+    await generateCategories()
+    await generateRandomData()
 
     const server = https.createServer({ key: key, cert: cert }, app)
 
