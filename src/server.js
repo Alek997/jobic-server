@@ -13,11 +13,6 @@ import reviewRouter from './resources/review/review.router'
 import notificationRouter from './resources/notification/notification.router'
 import { generateCategories, generateRandomData } from './utils/generator'
 
-const fs = require('fs')
-const key = fs.readFileSync('./key.pem')
-const cert = fs.readFileSync('./cert.pem')
-const https = require('https')
-
 const multer = require('multer')
 
 const storage = multer.diskStorage({
@@ -71,12 +66,10 @@ export const start = async () => {
     await generateCategories()
     await generateRandomData()
 
-    const server = https.createServer({ key: key, cert: cert }, app)
-
     app.get('/', (req, res) => {
       res.send('this is an secure server')
     })
-    server.listen(config.port, () => {
+    app.listen(config.port, () => {
       console.log('listening on 4000')
     })
   } catch (e) {
