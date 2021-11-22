@@ -60,11 +60,11 @@ app.post('/api/upload', (req, res) => {
 
 export const start = async () => {
   try {
-    // await connect()
+    await connect()
 
-    // // generating data if db is empty
-    // await generateCategories()
-    // await generateRandomData()
+    // generating data if db is empty
+    await generateCategories()
+    await generateRandomData()
 
     app.get('/', (req, res) => {
       res.send('this is an secure server')
