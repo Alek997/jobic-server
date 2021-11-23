@@ -21,7 +21,7 @@ export const createReview = async (req, res) => {
   try {
     const doc = await Review.create({ ...req.body, createdBy })
     const allReviews = await Review.find({ ratedUser: req.body.ratedUser })
-    const ratings = allReviews.map(item.rating)
+    const ratings = allReviews.map((review) => review.rating)
 
     const ratedUser = await User.findOneAndUpdate(
       { _id: req.body.ratedUser },
