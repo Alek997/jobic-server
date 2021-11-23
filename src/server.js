@@ -54,7 +54,7 @@ app.post('/api/upload', (req, res) => {
       res.sendStatus(500)
     }
 
-    res.send(`https://localhost:4000/${req.file?.filename}`)
+    res.send(`https://jobic.herokuapp.com/${req.file?.filename}`)
   })
 })
 
