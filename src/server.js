@@ -69,8 +69,8 @@ export const start = async () => {
     app.get('/', (req, res) => {
       res.send('this is an secure server')
     })
-    app.listen(config.port, () => {
-      console.log('listening on 4000')
+    app.listen(process.env.PORT || 5000, () => {
+      console.log('listening ')
     })
   } catch (e) {
     console.error(e)
