@@ -10,27 +10,27 @@ import { Review } from '../resources/review/review.model'
 const categories = [
   {
     name: 'Cleaning',
-    defaultImageUrl: 'https://localhost:4000/image-1637164557872.png',
+    defaultImageUrl: 'https://jobic.herokuapp.com/image-1637164557872.png',
   },
   {
     name: 'Ironing',
-    defaultImageUrl: 'https://localhost:4000/image-1637165007144.png',
+    defaultImageUrl: 'https://jobic.herokuapp.com/image-1637165007144.png',
   },
   {
     name: 'Car cleaning',
-    defaultImageUrl: 'https://localhost:4000/image-1637166143512.png',
+    defaultImageUrl: 'https://jobic.herokuapp.com/image-1637166143512.png',
   },
   {
     name: 'Delivery',
-    defaultImageUrl: 'https://localhost:4000/image-1637166163731.png',
+    defaultImageUrl: 'https://jobic.herokuapp.com/image-1637166163731.png',
   },
   {
     name: 'Dish washing',
-    defaultImageUrl: 'https://localhost:4000/image-1637166173734.png',
+    defaultImageUrl: 'https://jobic.herokuapp.com/image-1637166173734.png',
   },
   {
     name: 'Gardening',
-    defaultImageUrl: 'https://localhost:4000/image-1637166207061.png',
+    defaultImageUrl: 'https://jobic.herokuapp.com/image-1637166207061.png',
   },
 ]
 
