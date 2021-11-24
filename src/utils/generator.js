@@ -1,6 +1,6 @@
 import faker from 'faker'
 import mongoose from 'mongoose'
-import { random, capitalize } from 'lodash'
+import { random, capitalize, shuffle } from 'lodash'
 import { Category } from '../resources/category/category.model'
 import { User } from '../resources/user/user.model'
 import { Job } from '../resources/job/job.model'
@@ -101,16 +101,15 @@ export const generateReviews = async () => {
   const users = await User.find({}).lean().exec()
   const randomReviews = Array(50)
     .fill()
-    .map(() => ({
-      description: capitalize(faker.lorem.words(random(5, 30))),
-      rating: random(1, 5),
-      createdBy: new mongoose.mongo.ObjectId(
-        users[Math.floor(Math.random() * users.length)]._id
-      ),
-      ratedUser: new mongoose.mongo.ObjectId(
-        users[Math.floor(Math.random() * users.length)]._id
-      ),
-    }))
+    .map(() => {
+      const shuffledUsers = shuffle(users)
+      return {
+        description: capitalize(faker.lorem.words(random(5, 30))),
+        rating: random(1, 5),
+        createdBy: new mongoose.mongo.ObjectId(shuffledUsers[0]._id),
+        ratedUser: new mongoose.mongo.ObjectId(shuffledUsers[1]._id),
+      }
+    })
 
   return randomReviews.filter((review) => review.createdBy !== review.ratedUser)
 }
@@ -123,7 +122,7 @@ export const generateRandomData = async () => {
         for (let step = 0; step < 30; step++) {
           await User.create(await generateUser())
           await Job.create(await generateJob())
-          await JobApp.create(await generateJobApp())
+          // await JobApp.create(await generateJobApp())
         }
         await Review.insertMany(await generateReviews())
       }
