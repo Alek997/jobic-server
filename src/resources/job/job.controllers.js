@@ -24,10 +24,12 @@ export const filterJobs = async (req, res) => {
       $gte: parseInt(budgetFrom) || 0,
       $lte: parseInt(budgetTo) || 100000,
     },
-    ...req.query,
   }
   if (req.query.categoryId) {
     query['categoryId'] = req.query.categoryId
+  }
+  if (req.query.status) {
+    query['status'] = req.query.status
   }
 
   try {
